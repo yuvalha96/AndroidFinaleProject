@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="exitTxt">Exit</string>
+    <string name="settingsTxt">Settings</string>
+    <string name="ok">Accept</string>
+    <string name="cancel">cancel</string>
+
+    <string name="confirmationTxt">Are you sure?</string>
+    <string name="method_inner_file">Using inner file saving method.</string>
+    <string name="method_sp">Using SP saving method.</string>
+    <string name="countries_saved">Remember deleted countries.</string>
+    <string name="countries_unsaved">Forget deleted countries.</string>
+    <string name="todo">TODO</string>
+    <string name="newNoteTxt">New Note</string>
+</resources>
