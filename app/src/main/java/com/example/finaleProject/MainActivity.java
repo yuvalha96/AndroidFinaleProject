@@ -1,5 +1,6 @@
 package com.example.finaleProject;
 
+import android.app.Application;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +16,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 public class MainActivity extends AppCompatActivity implements NotesAdapter.INotesAdapterListener {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
