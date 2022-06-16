@@ -11,11 +11,14 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+
 
 
 public class MainViewModel extends AndroidViewModel {
@@ -42,8 +45,7 @@ public class MainViewModel extends AndroidViewModel {
 
 
 
-
-    public MainViewModel(@NonNull Application application, Context context, Activity activity, boolean checkBoxFilter) {
+    private MainViewModel(@NonNull Application application, Context context, Activity activity, boolean checkBoxFilter) {
         super(application);
         //super(application);
         // call your Rest API in init method
@@ -83,9 +85,13 @@ public class MainViewModel extends AndroidViewModel {
         }
         return instance;
     }
+
     // This use the setValue
     public void init(Application application, boolean checkBoxFilter){
         noteLiveData = new MutableLiveData<>();
+        noteLiveData.setValue(getNotesFromSP());
+        Log.d("yuval", "init: " + noteLiveData.getValue()); //prints the notes but still not working
+
         positionSelected = new MutableLiveData<>();
         positionSelected.setValue(-1);
 
@@ -98,6 +104,14 @@ public class MainViewModel extends AndroidViewModel {
         checkRemoveList(application); // this is also connect to lab 8 and 9
     }
 
+    private ArrayList<Note> getNotesFromSP() {
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        boolean flag = true;
+        int i = 0;
+        Gson gson = new Gson();
+        ArrayList<Note> staff = gson.fromJson(sharedPref.getString("noteListJson", ""), (new ArrayList<Note>()).getClass());
+        return staff;
+    }
 
 
     // Lab 8 (only set the country list) + Lab 9 ( remove from original list the remove country)
@@ -223,10 +237,12 @@ public class MainViewModel extends AndroidViewModel {
         noteList.add(newNote);
         setNoteLiveData(noteList);
 
+        Gson gson = new Gson();
+        String json = gson.toJson(noteList);
         // save to SP
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(Integer.toString(newNote.getId()), "title: " + newNote.getTitle());
+        editor.putString("noteListJson", json);
         editor.apply();
     }
 

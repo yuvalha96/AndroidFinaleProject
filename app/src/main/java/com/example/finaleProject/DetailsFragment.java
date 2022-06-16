@@ -18,7 +18,9 @@ import java.util.ArrayList;
 
 public class DetailsFragment extends Fragment {
 
-    private TextView detailsTextView;
+    private TextView titleTextView;
+    private TextView contentTextView;
+    private TextView dueDateTextView;
     private MainViewModel myViewModel;
 
     @Nullable
@@ -42,7 +44,9 @@ public class DetailsFragment extends Fragment {
  * https://developer.android.com/topic/libraries/architecture/viewmodel.html#sharing
  */
 
-        detailsTextView = view.findViewById(R.id.note_details_text_view);
+        titleTextView = view.findViewById(R.id.tvNoteTitle);
+        contentTextView = view.findViewById(R.id.tvNoteContent);
+        dueDateTextView = view.findViewById(R.id.tvDueDate);
         myViewModel = MainViewModel.getInstance(getActivity().getApplication(),getContext(), getActivity(), checkBoxFilter);
 
 
@@ -58,10 +62,13 @@ public class DetailsFragment extends Fragment {
                     Note note = list.get(selected);
 
                     if(note != null){
-                        detailsTextView.setText(note.getContent());
+                        titleTextView.setText(note.getTitle());
+                        contentTextView.setText(note.getContent());
+                        if (note.getDueDate() != null)
+                            dueDateTextView.setText(note.getDueDate().toString());
                     }
                 }else{
-                    detailsTextView.setText("");
+                    titleTextView.setText("");
                 }
             }
         };
