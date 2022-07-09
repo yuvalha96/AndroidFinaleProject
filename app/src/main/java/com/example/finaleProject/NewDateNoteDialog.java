@@ -38,7 +38,8 @@ public class NewDateNoteDialog extends DialogFragment {
         EditText newTitle =  view.findViewById(R.id.newTitle);
         EditText chooseDate = view.findViewById(R.id.chooseDate);
         EditText chooseTime = view.findViewById(R.id.chooseTime);
-        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MILLISECOND, 0); // Clear the millis part. Silly API.
 
         chooseDate.setOnClickListener(new View.OnClickListener() {
 
@@ -56,11 +57,9 @@ public class NewDateNoteDialog extends DialogFragment {
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                         // TODO Auto-generated method stub
                         /*      Your code   to get date and time    */
+                        calendar.set(selectedyear, selectedmonth, selectedday);
                         selectedmonth = selectedmonth + 1;
                         chooseDate.setText("" + selectedday + "/" + selectedmonth + "/" + selectedyear);
-                        date.setMonth(selectedmonth);
-                        date.setYear(selectedyear);
-                        date.setDate(selectedday);
                     }
                 }, mYear, mMonth, mDay);
                 mDatePicker.setTitle("Select Date");
@@ -81,8 +80,8 @@ public class NewDateNoteDialog extends DialogFragment {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         chooseTime.setText( selectedHour + ":" + selectedMinute);
-                        date.setHours(selectedHour);
-                        date.setMinutes(selectedMinute);
+                        calendar.set(Calendar.HOUR_OF_DAY, selectedHour);
+                        calendar.set(Calendar.MINUTE, selectedMinute);
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -110,7 +109,7 @@ public class NewDateNoteDialog extends DialogFragment {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 // create a new note
                                 MainViewModel myViewModel = MainViewModel.getInstance(getActivity().getApplication(), getContext(), getActivity(), false);
-                                myViewModel.addNewNote(newTitle.getText().toString(), date);
+                                myViewModel.addNewNote(newTitle.getText().toString(), calendar.getTime());
                             }
                         }
                 );

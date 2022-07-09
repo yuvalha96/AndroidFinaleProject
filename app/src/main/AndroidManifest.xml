@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.finaleProject">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 
     <application
         android:allowBackup="true"
@@ -9,6 +11,10 @@
         android:roundIcon="@drawable/postit"
         android:supportsRtl="true"
         android:theme="@style/Theme.finaleProject">
+        <service
+            android:name=".NotificationService"
+            android:enabled="true"
+            android:exported="true"></service>
         <activity android:name="com.example.finaleProject.MainActivity"
             android:exported="true">
             <intent-filter>

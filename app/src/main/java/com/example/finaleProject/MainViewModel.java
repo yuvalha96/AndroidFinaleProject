@@ -1,8 +1,11 @@
 package com.example.finaleProject;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -235,6 +238,16 @@ public class MainViewModel extends AndroidViewModel {
         Note newNote = new Note(title);
         if (date != null) {
             newNote.setDueDate(date);
+            // setup alarm for notification
+            AlarmManager myAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent alarmIntent_min = new Intent(context, NotificationService.class);
+            alarmIntent_min.putExtra("noteTitle", title);
+
+            PendingIntent alarmPendingIntent_min = PendingIntent.getService(context, 668, alarmIntent_min, 0);
+            Intent alarmInfoIntent = new Intent(context, MainActivity.class);
+            PendingIntent alarmInfoPendingIntent = PendingIntent.getActivity(context, 777,alarmInfoIntent,0);
+            AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(date.getTime(), alarmInfoPendingIntent);
+            myAlarmManager.setAlarmClock(alarmClockInfo, alarmPendingIntent_min);
         }
         ArrayList<Note> noteList = getNoteLiveData().getValue();
         noteList.add(newNote);
