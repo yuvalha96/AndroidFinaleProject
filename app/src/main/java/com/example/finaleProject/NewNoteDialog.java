@@ -33,7 +33,7 @@ public class NewNoteDialog extends DialogFragment {
                                 EditText newTitle = ((AlertDialog) dialog).findViewById(R.id.newTitle);
                                 //Log.d("yuval", "onClick: created a new note with title " + newTitle.getText());
                                 MainViewModel myViewModel = MainViewModel.getInstance(getActivity().getApplication(), getContext(), getActivity(), false);
-                                myViewModel.addNewNote(newTitle.getText().toString());
+                                myViewModel.addNewNote(newTitle.getText().toString(), null);
                             }
                         }
                 )

@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-
+import java.util.Date;
 
 
 public class MainViewModel extends AndroidViewModel {
@@ -231,8 +231,11 @@ public class MainViewModel extends AndroidViewModel {
 //        editor.apply();
 //    }
 
-    public void addNewNote(String title) {
+    public void addNewNote(String title, Date date) {
         Note newNote = new Note(title);
+        if (date != null) {
+            newNote.setDueDate(date);
+        }
         ArrayList<Note> noteList = getNoteLiveData().getValue();
         noteList.add(newNote);
         setNoteLiveData(noteList);

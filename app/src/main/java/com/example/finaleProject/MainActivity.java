@@ -64,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.INot
                 NewNoteDialog newNoteFragment = NewNoteDialog.newInstance();
                 newNoteFragment.show(getSupportFragmentManager(), "newNoteFrag");
                 break;
+            case R.id.newDateNote:
+                NewDateNoteDialog newDateNoteFragment = NewDateNoteDialog.newInstance();
+                newDateNoteFragment.show(getSupportFragmentManager(), "newNoteFrag");
+                break;
         }
         return  true;
     }

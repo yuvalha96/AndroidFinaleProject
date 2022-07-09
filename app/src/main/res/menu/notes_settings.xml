@@ -12,6 +12,9 @@
         android:id="@+id/newNote"
         android:title="@string/newNoteTxt" />
     <item
+        android:id="@+id/newDateNote"
+        android:title="@string/newDateNoteTxt" />
+    <item
         android:id="@+id/settings"
         android:title="@string/settingsTxt" />
     <item
