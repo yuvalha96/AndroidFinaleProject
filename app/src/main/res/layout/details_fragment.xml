@@ -5,29 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/details_fragment"
-    android:background="#2196F3"
+    android:background="#cce6ff"
     android:clickable="true">
 
     <TextView
         android:id="@+id/tvNoteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="0dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="10dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="177dp"
+        android:layout_marginTop="59dp"
         android:text="TextView" />
 
-    <TextView
-        android:id="@+id/tvNoteContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+    <EditText
+        android:id="@+id/edNoteContent"
+        android:layout_width="384dp"
+        android:layout_height="207dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="13dp"
+        android:hint="Insert your note here"
+        android:inputType="text"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
 
 </RelativeLayout>

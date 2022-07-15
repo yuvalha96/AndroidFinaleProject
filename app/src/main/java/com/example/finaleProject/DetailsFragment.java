@@ -1,9 +1,12 @@
 package com.example.finaleProject;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,8 +25,9 @@ public class DetailsFragment extends Fragment {
     private TextView contentTextView;
     private TextView dueDateTextView;
     private MainViewModel myViewModel;
-	private TextView gghghghhghghg;
-    private TextView gf;
+    private EditText noteText;
+    private Note note;
+
 
     @Nullable
     @Override
@@ -47,8 +51,9 @@ public class DetailsFragment extends Fragment {
  */
 
         titleTextView = view.findViewById(R.id.tvNoteTitle);
-        contentTextView = view.findViewById(R.id.tvNoteContent);
         dueDateTextView = view.findViewById(R.id.tvDueDate);
+        noteText = view.findViewById(R.id.edNoteContent);
+        noteText.addTextChangedListener(new handleTextChanged());
         myViewModel = MainViewModel.getInstance(getActivity().getApplication(),getContext(), getActivity(), checkBoxFilter);
 
 
@@ -61,13 +66,15 @@ public class DetailsFragment extends Fragment {
                 int selected = myViewModel.getPositionSelected().getValue();
                 ArrayList<Note> list  = myViewModel.getNoteLiveData().getValue();
                 if(selected != -1){
-                    Note note = list.get(selected);
+                    note = list.get(selected);
 
                     if(note != null){
                         titleTextView.setText(note.getTitle());
-                        contentTextView.setText(note.getContent());
+                        noteText.setText(note.getContent());
                         if (note.getDueDate() != null)
                             dueDateTextView.setText(note.getDueDate().toString());
+                        else
+                            dueDateTextView.setText("");
                     }
                 }else{
                     titleTextView.setText("");
@@ -81,4 +88,22 @@ public class DetailsFragment extends Fragment {
 
     }
 
+    public class handleTextChanged  implements TextWatcher{
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String input = noteText.getText().toString();
+            note.setContent(input);
+
+        }
+    }
 }
