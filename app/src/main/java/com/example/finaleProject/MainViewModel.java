@@ -95,16 +95,14 @@ public class MainViewModel extends AndroidViewModel {
         noteLiveData.setValue(getNotesFromSP());
         Log.d("yuval", "init: " + noteLiveData.getValue()); //prints the notes but still not working
 
-//        positionSelected = new MutableLiveData<>();
-//        positionSelected.setValue(-1);
-//
-//
-//
+        positionSelected = new MutableLiveData<>();
+        positionSelected.setValue(-1);
+
 //        // lab 9
-//        saveRemoved = new MutableLiveData<>();
-//        saveRemoved.setValue(checkBoxFilter);
-//        removedNotes = new MutableLiveData<>();
-//        checkRemoveList(application); // this is also connect to lab 8 and 9
+        saveRemoved = new MutableLiveData<>();
+        saveRemoved.setValue(checkBoxFilter);
+        removedNotes = new MutableLiveData<>();
+        checkRemoveList(application); // this is also connect to lab 8 and 9
     }
 
     private ArrayList<Note> getNotesFromSP() {
