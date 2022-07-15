@@ -95,22 +95,20 @@ public class MainViewModel extends AndroidViewModel {
         noteLiveData.setValue(getNotesFromSP());
         Log.d("yuval", "init: " + noteLiveData.getValue()); //prints the notes but still not working
 
-        positionSelected = new MutableLiveData<>();
-        positionSelected.setValue(-1);
-
-
-
-        // lab 9
-        saveRemoved = new MutableLiveData<>();
-        saveRemoved.setValue(checkBoxFilter);
-        removedNotes = new MutableLiveData<>();
-        checkRemoveList(application); // this is also connect to lab 8 and 9
+//        positionSelected = new MutableLiveData<>();
+//        positionSelected.setValue(-1);
+//
+//
+//
+//        // lab 9
+//        saveRemoved = new MutableLiveData<>();
+//        saveRemoved.setValue(checkBoxFilter);
+//        removedNotes = new MutableLiveData<>();
+//        checkRemoveList(application); // this is also connect to lab 8 and 9
     }
 
     private ArrayList<Note> getNotesFromSP() {
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        boolean flag = true;
-        int i = 0;
         Gson gson = new Gson();
         ArrayList<Note> staff = gson.fromJson(sharedPref.getString("noteListJson", ""), (new ArrayList<Note>()).getClass());
         return staff;
@@ -251,8 +249,12 @@ public class MainViewModel extends AndroidViewModel {
         }
         ArrayList<Note> noteList = getNoteLiveData().getValue();
         noteList.add(newNote);
-        setNoteLiveData(noteList);
+        setNoteLiveData(noteList); // check if this line is necessary
 
+        saveToSp(noteList);
+    }
+
+    public void saveToSp(ArrayList<Note> noteList) {
         Gson gson = new Gson();
         String json = gson.toJson(noteList);
         // save to SP
