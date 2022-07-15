@@ -22,7 +22,7 @@ public class DetailsFragment extends Fragment {
     private TextView contentTextView;
     private TextView dueDateTextView;
     private MainViewModel myViewModel;
-
+	private TextView gghghghhghghg;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
