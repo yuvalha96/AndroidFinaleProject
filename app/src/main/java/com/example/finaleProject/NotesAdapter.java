@@ -167,15 +167,21 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Class<? extends Note> s = myViewModel.getNoteLiveData().getValue().get(getAdapterPosition()).getClass();
-                    myViewModel.getNoteLiveData().getValue().remove(getAdapterPosition());
-                    ArrayList<Note> list = myViewModel.getNotesFromSP();
+                    Log.d("Yuval", "onLongClick: 1");
+                    Note s = myViewModel.getNoteLiveData().getValue().get(getAdapterPosition());
+                    Log.d("Yuval", "onLongClick: 2");
+
+                    ArrayList<Note> list = myViewModel.getNoteLiveData().getValue();
+                    Log.d("Yuval", "onLongClick: 3");
                     list.remove(s);
+                    Log.d("Yuval", "onLongClick: 4");
                     myViewModel.saveToSp(list);
-                    for(Note n : myViewModel.getNoteLiveData().getValue())
-                        Log.d("Yuval",n.getTitle());
+                    Log.d("Yuval", "onLongClick: 5");
+
                     notifyItemRemoved(getAdapterPosition());
+                    Log.d("Yuval", "onLongClick: 6");
                     myViewModel.getPositionSelected().setValue(-1);
+                    Log.d("Yuval", "onLongClick: 7");
 
                     return true;
                 }

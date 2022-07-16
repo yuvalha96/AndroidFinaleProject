@@ -298,13 +298,15 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void saveToSp(ArrayList<Note> noteList) {
-        if (noteList.get(0).isSmsNote()) {
-            // can't remove here, because it will change the live data. so make a deep copy instead
-            ArrayList<Note> newNoteList = new ArrayList<>();
-            for (int i = 1; i < noteList.size(); i++) {
-                newNoteList.add(noteList.get(i));
+        if(noteList.size()>0){
+            if (noteList.get(0).isSmsNote()) {
+                // can't remove here, because it will change the live data. so make a deep copy instead
+                ArrayList<Note> newNoteList = new ArrayList<>();
+                for (int i = 1; i < noteList.size(); i++) {
+                  newNoteList.add(noteList.get(i));
+                }
+                noteList = newNoteList;
             }
-            noteList = newNoteList;
         }
         Gson gson = new Gson();
         Type arrayListNoteType = new TypeToken<ArrayList<Note>>() {}.getType();
