@@ -38,6 +38,17 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         myViewModel = MainViewModel.getInstance(application, Mycontext, activity, checkBoxFilter);
         noteArrayList = myViewModel.getNoteLiveData().getValue();
         this.context = context;
+
+        //observe data changes
+        Observer<ArrayList<Note>> observeDataChanges = new Observer<ArrayList<Note>>() {
+            @Override
+            public void onChanged(ArrayList<Note> list) {
+                noteArrayList = list;
+                notifyDataSetChanged();
+            }
+        };
+
+        myViewModel.getNoteLiveData().observe((LifecycleOwner)context, observeDataChanges);
     }
 
 
@@ -68,7 +79,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         };
 
         myViewModel.getPositionSelected().observe((LifecycleOwner)context, observeSelectedIndex);
-
 
         if (selectedRow == position){
             holder.row_linearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));

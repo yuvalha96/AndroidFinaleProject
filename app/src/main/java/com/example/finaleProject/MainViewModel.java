@@ -313,9 +313,8 @@ public class MainViewModel extends AndroidViewModel {
         newNote.setContent(content);
         newNote.setDueDate(date);
         newNote.setSmsNote();
-        ArrayList<Note> noteList = new ArrayList<>();
-        noteList.addAll(noteLiveData.getValue());
-        if (noteList.get(0).isSmsNote()) {
+        ArrayList<Note> noteList = noteLiveData.getValue();
+        if (noteList.size() > 0 && noteList.get(0).isSmsNote()) {
             noteList.remove(0);
         }
         noteList.add(0,newNote);
