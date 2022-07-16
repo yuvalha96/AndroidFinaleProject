@@ -95,6 +95,9 @@ public class MainViewModel extends AndroidViewModel {
         noteLiveData = new MutableLiveData<>();
         ArrayList<Note> tempNoteList = getNotesFromSP();
 
+        for(Note n: tempNoteList)
+            Log.d("Orbs10", n.getTitle());
+
         if (tempNoteList == null) {
             tempNoteList = new ArrayList<Note>();
         }
@@ -115,7 +118,7 @@ public class MainViewModel extends AndroidViewModel {
         //checkRemoveList(application); // this is also connect to lab 8 and 9
     }
 
-    private ArrayList<Note> getNotesFromSP() {
+    public ArrayList<Note> getNotesFromSP() {
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         Gson gson = new Gson();
         Type arrayListNoteType = new TypeToken<ArrayList<Note>>() {}.getType();

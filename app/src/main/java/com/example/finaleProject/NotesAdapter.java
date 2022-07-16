@@ -6,6 +6,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -163,6 +164,22 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
             nameTextView        = itemView.findViewById(R.id.titleTextView);
             dueDateTextView = itemView.findViewById(R.id.dueDateTextView);
             row_linearLayout    = itemView.findViewById(R.id.note_item);
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Class<? extends Note> s = myViewModel.getNoteLiveData().getValue().get(getAdapterPosition()).getClass();
+                    myViewModel.getNoteLiveData().getValue().remove(getAdapterPosition());
+                    ArrayList<Note> list = myViewModel.getNotesFromSP();
+                    list.remove(s);
+                    myViewModel.saveToSp(list);
+                    for(Note n : myViewModel.getNoteLiveData().getValue())
+                        Log.d("Yuval",n.getTitle());
+                    notifyItemRemoved(getAdapterPosition());
+                    myViewModel.getPositionSelected().setValue(-1);
+
+                    return true;
+                }
+            });
         }
 
         //******** This function bind\connect the row widgets with the data

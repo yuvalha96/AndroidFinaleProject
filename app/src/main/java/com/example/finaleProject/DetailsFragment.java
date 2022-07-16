@@ -27,7 +27,7 @@ public class DetailsFragment extends Fragment {
     private MainViewModel myViewModel;
     private EditText noteText;
     private Note note;
-
+    ArrayList<Note> list;
 
     @Nullable
     @Override
@@ -64,7 +64,7 @@ public class DetailsFragment extends Fragment {
             @Override
             public void onChanged(Integer index) {
                 int selected = myViewModel.getPositionSelected().getValue();
-                ArrayList<Note> list  = myViewModel.getNoteLiveData().getValue();
+                list  = myViewModel.getNoteLiveData().getValue();
                 if(selected != -1){
                     note = list.get(selected);
 
@@ -103,6 +103,8 @@ public class DetailsFragment extends Fragment {
         public void afterTextChanged(Editable editable) {
             String input = noteText.getText().toString();
             note.setContent(input);
+            myViewModel.saveToSp(list);
+
 
         }
     }
