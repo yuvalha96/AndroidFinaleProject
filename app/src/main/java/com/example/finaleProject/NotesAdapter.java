@@ -2,14 +2,17 @@ package com.example.finaleProject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +34,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     private INotesAdapterListener listener;
     private NotesViewHolder viewHolder;
     private final Context context;
+    private boolean flag = false;
 
 
     public NotesAdapter(Application application, Context context, Activity activity, boolean checkBoxFilter) {
@@ -164,26 +168,29 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
             nameTextView        = itemView.findViewById(R.id.titleTextView);
             dueDateTextView = itemView.findViewById(R.id.dueDateTextView);
             row_linearLayout    = itemView.findViewById(R.id.note_item);
+
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Log.d("Yuval", "onLongClick: 1");
+                    flag = false;
                     Note s = myViewModel.getNoteLiveData().getValue().get(getAdapterPosition());
-                    Log.d("Yuval", "onLongClick: 2");
+                    new AlertDialog.Builder(context)
+                            .setTitle("Confirm Delete")
+                            .setMessage("Are you sure you want to delete " + s.getTitle() + " ?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ArrayList<Note> list = myViewModel.getNoteLiveData().getValue();
+                                    list.remove(s);
+                                    myViewModel.saveToSp(list);
+                                    notifyItemRemoved(getAdapterPosition());
+                                    myViewModel.getPositionSelected().setValue(-1);
+                                    flag = true;
+                                }
+                            }).setNegativeButton("No", null).show();
 
-                    ArrayList<Note> list = myViewModel.getNoteLiveData().getValue();
-                    Log.d("Yuval", "onLongClick: 3");
-                    list.remove(s);
-                    Log.d("Yuval", "onLongClick: 4");
-                    myViewModel.saveToSp(list);
-                    Log.d("Yuval", "onLongClick: 5");
 
-                    notifyItemRemoved(getAdapterPosition());
-                    Log.d("Yuval", "onLongClick: 6");
-                    myViewModel.getPositionSelected().setValue(-1);
-                    Log.d("Yuval", "onLongClick: 7");
-
-                    return true;
+                    return flag;
                 }
             });
         }
