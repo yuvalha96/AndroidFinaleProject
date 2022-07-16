@@ -9,6 +9,7 @@ public class Note implements Serializable {
     private Date dueDate;
     private int id;
     static int counter = 0;
+    private boolean isSmsNote = false;
 
     public Note(String title) {
         this.title = title;
@@ -47,5 +48,13 @@ public class Note implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isSmsNote() {
+        return isSmsNote;
+    }
+
+    public void setSmsNote() {
+        isSmsNote = !isSmsNote;
     }
 }
