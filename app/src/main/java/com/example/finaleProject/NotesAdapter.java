@@ -25,11 +25,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     private static ArrayList<Note> noteArrayList;
     private int selectedRow = -1;
-    private MainViewModel myViewModel;
-    private Application Mycontext;
+    private final MainViewModel myViewModel;
+    private final Application Mycontext;
     private INotesAdapterListener listener;
     private NotesViewHolder viewHolder;
-    private Context context;
+    private final Context context;
 
 
     public NotesAdapter(Application application, Context context, Activity activity, boolean checkBoxFilter) {
@@ -151,7 +151,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         private final View noteItem;
         private final TextView  nameTextView;
         private final TextView dueDateTextView;
-        private LinearLayout row_linearLayout;
+        private final LinearLayout row_linearLayout;
 
         public LinearLayout getRow(){
             return row_linearLayout;
@@ -179,7 +179,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     private static int getDrawableId(Context context, String drawableName) {
         Resources resources = context.getResources();
-       return resources.getIdentifier(drawableName, "drawable", context.getPackageName());
+        return resources.getIdentifier(drawableName, "drawable", context.getPackageName());
     }
 
 

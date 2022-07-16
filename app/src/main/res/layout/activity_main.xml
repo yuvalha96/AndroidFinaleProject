@@ -5,7 +5,7 @@
     android:id="@+id/mainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#33B5E6"
+    android:background="#ffff80"
     android:padding="10dp"
     tools:context=".MainActivity">
 
@@ -18,7 +18,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="0dp"
-        android:background="@color/white"
+        android:background="@drawable/selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"

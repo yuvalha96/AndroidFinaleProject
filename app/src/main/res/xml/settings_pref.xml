@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <CheckBoxPreference
-        android:id="@+id/remember_removed_countries"
+        android:id="@+id/remember_removed_notes"
         android:defaultValue="false"
         android:key="remember"
-        android:title="Remember removed countries ?" />
+        android:title="Remember removed notes ?" />
 
 </PreferenceScreen>

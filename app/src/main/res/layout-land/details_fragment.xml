@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/details_fragment"
-    android:background="@drawable/image_rounded"
-
+    android:background="#cce6ff"
     android:clickable="true">
 
     <TextView
@@ -15,10 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="0dp"
         android:padding="10dp"
-        android:textSize="20dp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,36 +24,28 @@
 
     <TextView
         android:id="@+id/tvDueDate"
-        android:layout_width="375dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="59dp"
-        android:text="TextView"
-        android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:layout_marginStart="333dp"
+        android:layout_marginTop="63dp"
+        android:text="TextView" />
 
     <EditText
         android:id="@+id/edNoteContent"
-        android:layout_width="388dp"
-        android:layout_height="477dp"
+        android:layout_width="384dp"
+        android:layout_height="207dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="97dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="29dp"
-        android:background="@drawable/border_for_et"
-        android:gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="173dp"
         android:hint="Insert your note here"
         android:inputType="text"
         android:text=""
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
         android:textSize="20dp" />
 
 
