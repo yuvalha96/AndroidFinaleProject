@@ -53,7 +53,7 @@ public class DetailsFragment extends Fragment {
         titleTextView = view.findViewById(R.id.tvNoteTitle);
         dueDateTextView = view.findViewById(R.id.tvDueDate);
         noteText = view.findViewById(R.id.edNoteContent);
-        noteText.addTextChangedListener(new handleTextChanged());
+
         myViewModel = MainViewModel.getInstance(getActivity().getApplication(),getContext(), getActivity(), checkBoxFilter);
 
 
@@ -67,17 +67,19 @@ public class DetailsFragment extends Fragment {
                 list  = myViewModel.getNoteLiveData().getValue();
                 if(selected != -1){
                     note = list.get(selected);
-
+                    noteText.setVisibility(View.VISIBLE);
                     if(note != null){
                         titleTextView.setText(note.getTitle());
                         noteText.setText(note.getContent());
+                        noteText.addTextChangedListener(new handleTextChanged());
                         if (note.getDueDate() != null)
                             dueDateTextView.setText(note.getDueDate().toString());
                         else
                             dueDateTextView.setText("");
                     }
                 }else{
-                    titleTextView.setText("");
+                    titleTextView.setText("No note was chosen");
+                    noteText.setVisibility(View.GONE);
                 }
             }
         };
@@ -104,6 +106,7 @@ public class DetailsFragment extends Fragment {
             String input = noteText.getText().toString();
             note.setContent(input);
             myViewModel.saveToSp(list);
+
 
 
         }
