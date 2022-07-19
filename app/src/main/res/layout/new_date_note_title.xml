@@ -11,7 +11,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
+        android:textColorHint="#807e78"
         android:hint="Enter Title"
+        android:textColor="@color/black"
         android:inputType="text" />
 
     <EditText
@@ -23,6 +25,8 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:hint="Choose time"
+        android:textColorHint="#807e78"
+        android:textColor="@color/black"
         android:inputType="text"
         android:focusable="false"/>
 
@@ -32,8 +36,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="16dp"
+        android:textColorHint="#807e78"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
+        android:textColor="@color/black"
+
         android:hint="Choose date"
         android:inputType="text"
         android:focusable="false"/>
