@@ -14,9 +14,9 @@
     <item
         android:id="@+id/newDateNote"
         android:title="@string/newDateNoteTxt" />
-    <item
-        android:id="@+id/settings"
-        android:title="@string/settingsTxt" />
+<!--    <item-->
+<!--        android:id="@+id/settings"-->
+<!--        android:title="@string/settingsTxt" />-->
     <item
         android:id="@+id/exit"
         android:title="@string/exitTxt" />
