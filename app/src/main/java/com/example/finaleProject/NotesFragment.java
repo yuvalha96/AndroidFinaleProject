@@ -31,11 +31,8 @@ public class NotesFragment extends Fragment  {
     @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // lab 9
-        boolean checkBoxFilter =  PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("remember", false);
 
-
-        notesAdapter = new NotesAdapter(getActivity().getApplication(), getContext(), getActivity(), checkBoxFilter); // create an instance of the adapter
+        notesAdapter = new NotesAdapter(getActivity().getApplication(), getContext(), getActivity()); // create an instance of the adapter
         recyclerView.setAdapter(notesAdapter); // set that adapter for the recycle view
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity())); // What is the position of the list vertical or linear
 

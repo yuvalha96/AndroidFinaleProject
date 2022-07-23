@@ -34,10 +34,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     private boolean flag = false;
 
 
-    public NotesAdapter(Application application, Context context, Activity activity, boolean checkBoxFilter) {
+    public NotesAdapter(Application application, Context context, Activity activity) {
 
         Mycontext = application;
-        myViewModel = MainViewModel.getInstance(application, Mycontext, activity, checkBoxFilter);
+        myViewModel = MainViewModel.getInstance(application, Mycontext, activity);
         noteArrayList = myViewModel.getNoteLiveData().getValue();
         this.context = context;
 
@@ -62,7 +62,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         View noteView = inflater.inflate(R.layout.note_item, parent, false); // get view of the country view object
         viewHolder = new NotesViewHolder(noteView);
 
-        return viewHolder; // return country view holder
+        return viewHolder; // return note view holder
     }
 
 
@@ -95,45 +95,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 selectedRow = position;
                 notifyItemChanged(selectedRow);
                 notifyDataSetChanged();
-                myViewModel.setPositionSelected(selectedRow); // Lab 8
+                myViewModel.setPositionSelected(selectedRow);
                 listener.noteClicked(); // This what will open the frag from the MainActivity listener
             }
         });
-
-        //Long Press
-//        holder.row_linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                int position = holder.getAdapterPosition();
-//
-//                boolean removeList =  PreferenceManager.getDefaultSharedPreferences(Mycontext).getBoolean("remember", false);
-//                if(removeList) {
-//                    String removeNoteName = noteArrayList.get(position).getTitle();
-//                    //myViewModel.setRemoveListBySP(removeNoteName);
-//                    myViewModel.setRemoveListByFile(removeNoteName);
-//                }
-//
-//                // ************ lab 8
-//                noteArrayList.remove(position);
-//
-//                myViewModel.setNoteLiveData(noteArrayList);
-//
-//                // Here we do some logic
-//                // if the position equals to the current selected row so we need to unselected completely the selected row
-//                if(position == myViewModel.getPositionSelected().getValue()){
-//                    myViewModel.setPositionSelected(-1);
-//                }
-//
-//                if(position < myViewModel.getPositionSelected().getValue()){
-//                    myViewModel.setPositionSelected(myViewModel.getPositionSelected().getValue()-1);
-//                }
-//
-//
-//                notifyDataSetChanged();
-//                return true;
-//            }
-//        });
-
         holder.bindData(note.getTitle(), note.getDueDate());
     }
 

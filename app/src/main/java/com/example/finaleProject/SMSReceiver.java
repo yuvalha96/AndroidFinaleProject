@@ -23,7 +23,7 @@ public class SMSReceiver extends BroadcastReceiver {
         {
             String sender = message.getDisplayOriginatingAddress();
             String body = message.getDisplayMessageBody();
-            myViewModel = MainViewModel.getInstance((Application)context.getApplicationContext(), context, null, false);
+            myViewModel = MainViewModel.getInstance((Application)context.getApplicationContext(), context, null);
             myViewModel.addNewSMSNote(sender, body, new Date(System.currentTimeMillis()));
         }
     }

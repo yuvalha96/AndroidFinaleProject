@@ -39,7 +39,7 @@ public class NewDateNoteDialog extends DialogFragment {
         EditText chooseDate = view.findViewById(R.id.chooseDate);
         EditText chooseTime = view.findViewById(R.id.chooseTime);
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.MILLISECOND, 0); // Clear the millis part. Silly API.
+        calendar.set(Calendar.MILLISECOND, 0); // Clear the millis part
 
         chooseDate.setOnClickListener(new View.OnClickListener() {
 
@@ -108,7 +108,7 @@ public class NewDateNoteDialog extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 // create a new note
-                                MainViewModel myViewModel = MainViewModel.getInstance(getActivity().getApplication(), getContext(), getActivity(), false);
+                                MainViewModel myViewModel = MainViewModel.getInstance(getActivity().getApplication(), getContext(), getActivity());
                                 myViewModel.addNewNote(newTitle.getText().toString(), calendar.getTime());
                             }
                         }

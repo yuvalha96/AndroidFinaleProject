@@ -30,13 +30,6 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.INot
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        FragmentManager manager= getSupportFragmentManager();
-//        DetailsFragment fragment = (DetailsFragment) manager.findFragmentByTag("PORTRAIT");
-//        if (fragment != null) {
-//            manager.beginTransaction().detach(fragment).commit();
-//            manager.executePendingTransactions();
-//        }
         ActionBar menu = getSupportActionBar();
         menu.setDisplayShowHomeEnabled(true);
         menu.setDisplayUseLogoEnabled(true);
@@ -49,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.INot
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.notes_settings, menu);
-        //inflater.inflate(R.menu.settings, menu);
-        //inflater.inflate(R.menu.menu_exit, menu);
 
         return true;
     }
@@ -62,22 +53,6 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.INot
                 MyExit exitFragment = MyExit.newInstance();
                 exitFragment.show(getSupportFragmentManager(), "exitDialog");
                 break;
-            case R.id.NotesSettings:
-                break;
-//            case R.id.settings:
-//                FragmentManager fm = getSupportFragmentManager();
-//                Fragment toHide = fm.findFragmentById(R.id.frag_container);
-//                FragmentTransaction ft = fm.beginTransaction();
-//                if (toHide != null) {
-//                    ft.hide(toHide);    // hide main fragment.
-//                }
-//
-//                // This is the parent activity
-//                // Pay attention on note that the SettingFragment has
-//                ft.add(R.id.mainActivity, new SettingFragment())
-//                        .addToBackStack(null)
-//                        .commit();
-//                break;
             case R.id.newNote:
                 NewNoteDialog newNoteFragment = NewNoteDialog.newInstance();
                 newNoteFragment.show(getSupportFragmentManager(), "newNoteFrag");
@@ -95,10 +70,6 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.INot
         DetailsFragment fragB;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             fragB = (DetailsFragment) getSupportFragmentManager().findFragmentById(R.id.details_fragment);
-//            if (fragB != null) {
-//                getSupportFragmentManager().beginTransaction().detach(fragB).commit();
-//                getSupportFragmentManager().executePendingTransactions();
-//            }
         }
         else //I am in portrait
         {

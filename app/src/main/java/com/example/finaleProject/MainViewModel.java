@@ -32,34 +32,19 @@ public class MainViewModel extends AndroidViewModel {
 
     public Context context;
     public Activity activity;
-
-    // ******* The observable vars *********************
-
-    //  The MutableLiveData class has the setValue(T) and postValue(T)
-    //  methods publicly and you must use these if you need to edit the value stored in a LiveData object.
-    //  Usually, MutableLiveData is used in the ViewModel and then the ViewModel only exposes
-
     private MutableLiveData<ArrayList<Note>> noteLiveData;
     private MutableLiveData<Integer> positionSelected;
-    // *****************************
-    // lab 9
-//    private MutableLiveData<Boolean> saveRemoved;
     private int[] intArr;
-//    private ArrayList<String> removedNoteList = new ArrayList<>();
 
 
 
-    private MainViewModel(@NonNull Application application, Context context, Activity activity, boolean checkBoxFilter) {
+    private MainViewModel(@NonNull Application application, Context context, Activity activity) {
         super(application);
-        //super(application);
-        // call your Rest API in init method
+
         this.activity = activity;
         this.context = context;
 
-        // Lab 8 + Lab 9
-        init(application, checkBoxFilter);
-
-
+        init(application);
     }
 
     public MutableLiveData<ArrayList<Note>> getNoteLiveData() {
@@ -78,25 +63,19 @@ public class MainViewModel extends AndroidViewModel {
         noteLiveData.setValue(list);
     }
 
-//    public boolean getSaveRemove(){
-//        return saveRemoved.getValue();
-//    }
 
     // Pay attention that MainViewModel is singleton it helps
-    public static MainViewModel getInstance(Application application, Context context, Activity activity, boolean checkBoxFilter){
+    public static MainViewModel getInstance(Application application, Context context, Activity activity){
         if(instance ==null){
-            instance = new MainViewModel(application, context, activity, checkBoxFilter);
+            instance = new MainViewModel(application, context, activity);
         }
         return instance;
     }
 
     // This use the setValue
-    public void init(Application application, boolean checkBoxFilter){
+    public void init(Application application ){
         noteLiveData = new MutableLiveData<>();
         ArrayList<Note> tempNoteList = getNotesFromSP();
-
-        for(Note n: tempNoteList)
-            Log.d("Orbs10", n.getTitle());
 
         if (tempNoteList == null) {
             tempNoteList = new ArrayList<Note>();
@@ -107,15 +86,10 @@ public class MainViewModel extends AndroidViewModel {
             tempNoteList.add(0, smsNote);
 
         noteLiveData.setValue(tempNoteList);
-        Log.d("yuval", "init: " + noteLiveData.getValue()); //prints the notes but still not working
-
 
         positionSelected = new MutableLiveData<>();
         positionSelected.setValue(-1);
 
-
-
-        //checkRemoveList(application); // this is also connect to lab 8 and 9
     }
 
     public ArrayList<Note> getNotesFromSP() {
@@ -155,123 +129,6 @@ public class MainViewModel extends AndroidViewModel {
     }
 
 
-//    // Lab 8 (only set the country list) + Lab 9 ( remove from original list the remove country)
-//    public void checkRemoveList(Application application){
-//        ArrayList<Note> notesList = new ArrayList<Note>();
-//
-//
-//        if(saveRemoved.getValue()) {
-//
-//            String s = getRemoveListByFile();
-//            //String s = getRemoveListBySP();
-//
-//            String[] removeArray = s.split(",",notesList.size());
-//                for(int i = 0; i < removeArray.length; i++) {
-//                    int finalI = i;
-//                    //notesList.removeIf(obj -> obj.getName().equals(removeArray[finalI]));
-//                }
-//        }else{// clear files
-//            clearListByFile();
-//            //clearListBySP();
-//        }
-//        noteLiveData.setValue(notesList);
-//
-//
-//    }
-
-    // ******************** file ************
-//    public String getRemoveListByFile() {
-//        String ret = "";
-//
-//        try {
-//            InputStream inputStream = context.openFileInput("remove.txt");
-//
-//            if ( inputStream != null ) {
-//                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-//                int size = inputStream.available();
-//                char[] buffer = new char[size];
-//
-//                inputStreamReader.read(buffer);
-//
-//                inputStream.close();
-//                ret = new String(buffer);
-//            }
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return ret;
-//    }
-
-//    public void setRemoveListByFile(String name)
-//    {
-//        if(!removedNoteList.contains(name)){
-//            String removelist = getRemoveListByFile();
-//            if(removelist.length() == 0)
-//                removelist = name;
-//            else{
-//                removelist += "," + name;
-//            }
-//            try {
-//                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("remove.txt", Context.MODE_PRIVATE));
-//                outputStreamWriter.write(removelist);
-//                outputStreamWriter.flush();
-//                outputStreamWriter.close();
-//            }
-//            catch (IOException e) {
-//                Log.e("Exception", "File write failed: " + e.toString());
-//            }
-//        }
-//
-//    }
-
-//
-//    private void clearListByFile() {
-//        try {
-//            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("remove.txt", Context.MODE_PRIVATE));
-//            outputStreamWriter.write("");
-//            outputStreamWriter.flush();
-//            outputStreamWriter.close();
-//        }
-//        catch (IOException e) {
-//            Log.e("Exception", "File write failed: " + e.toString());
-//        }
-//
-//    }
-
-
-    // ******************* SP **********************
-//    public void setRemoveListBySP(String name) {
-//
-//        if (!removedNoteList.contains(name)) {
-//            String removelist = getRemoveListBySP();
-//            if (removelist.length() == 0)
-//                removelist = name;
-//            else
-//                removelist += "," + name;
-//
-//            SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-//            SharedPreferences.Editor editor = sharedPref.edit();
-//            editor.putString("removelist", removelist);
-//            editor.apply();
-//
-//        }
-//    }
-//
-//    public String getRemoveListBySP() {
-//
-//        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-//        return sharedPref.getString("removelist", "");
-//    }
-//
-//    private void clearListBySP() {
-//
-//        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPref.edit();
-//        editor.putString("removelist", "");
-//        editor.apply();
-//    }
-
     public void addNewNote(String title, Date date) {
         Note newNote = new Note(title);
         if (date != null) {
@@ -290,10 +147,6 @@ public class MainViewModel extends AndroidViewModel {
         ArrayList<Note> noteList = getNoteLiveData().getValue();
         noteList.add(newNote);
         setNoteLiveData(noteList); // check if this line is necessary
-        Log.d("yuval", "addNewNote: " + noteLiveData.getValue());
-        for (int i = 0 ; i < noteList.size(); i++) {
-            Log.d("yuval", "addNewNote: " + i + " " + noteLiveData.getValue().get(i).getTitle());
-        }
         saveToSp(noteList);
     }
 
@@ -329,10 +182,6 @@ public class MainViewModel extends AndroidViewModel {
         }
         noteList.add(0,newNote);
         setNoteLiveData(noteList);
-        Log.d("yuval", "addNewSMSNote: "+ noteLiveData.getValue());
-        for (int i = 0 ; i < noteList.size(); i++) {
-            Log.d("yuval", "addNewNote: " + i + " " + noteList.get(i).getTitle());
-        }
 
         Gson gson = new Gson();
         String json = gson.toJson(newNote);

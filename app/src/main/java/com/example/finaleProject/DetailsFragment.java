@@ -38,23 +38,12 @@ public class DetailsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        // lab 9
-        boolean checkBoxFilter =  PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getBoolean("remember", false);
-
-/** *
- * https://developer.android.com/topic/libraries/architecture/livedata
- */
-
-/***
- * https://developer.android.com/topic/libraries/architecture/viewmodel.html#sharing
- */
 
         titleTextView = view.findViewById(R.id.tvNoteTitle);
         dueDateTextView = view.findViewById(R.id.tvDueDate);
         noteText = view.findViewById(R.id.edNoteContent);
 
-        myViewModel = MainViewModel.getInstance(getActivity().getApplication(),getContext(), getActivity(), checkBoxFilter);
+        myViewModel = MainViewModel.getInstance(getActivity().getApplication(),getContext(), getActivity());
 
 
 
@@ -106,9 +95,6 @@ public class DetailsFragment extends Fragment {
             String input = noteText.getText().toString();
             note.setContent(input);
             myViewModel.saveToSp(list);
-
-
-
         }
     }
 }
