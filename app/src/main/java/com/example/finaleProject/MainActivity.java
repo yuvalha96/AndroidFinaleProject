@@ -82,20 +82,6 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.INot
         }
     }
 
-
-
-    // Nested class to show settings frag
-    //Note: This class is Knows how to automatically and independently handle all the clicks
-    // and changes that the user makes and saves them in a Preference file
-    public static class SettingFragment extends PreferenceFragmentCompat {
-
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.settings_pref, rootKey);
-        }
-
-    }
-
     private void askForSmsDangerousPermissions() {
         requestSmsDangerousPermission(Manifest.permission.READ_SMS, READ_SMS_REQUEST_CODE);
         requestSmsDangerousPermission(Manifest.permission.RECEIVE_SMS, RECEIVE_SMS_REQUEST_CODE);
